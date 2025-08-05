@@ -1,0 +1,6 @@
+resemblyzer
+numpy
+scipy
+librosa
+soundfile
+torch
