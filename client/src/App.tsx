@@ -2,15 +2,20 @@ import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
-import { useSpeechToText } from "./hooks/use-speech-to-text";
+import { useSpeechWithAudio } from "./hooks/use-speech-to-text";
 
 function App() {
   const [count, setCount] = useState(0);
   const [stmt, setStmt] = useState<Record<string, string>[]>([]);
-  const setupVoices = (statement: string) => {
+  const setupVoices = (statement: string, blob: Blob) => {
     setStmt((prev) => [...prev, { [`V${prev.length}`]: statement }]);
+    const tempUrl = URL.createObjectURL(blob);
+    console.log("Temporary file URL:", tempUrl);
+    // Example: Use in <audio> preview
+    // const audio = new Audio(tempUrl);
+    // audio.play();
   };
-  useSpeechToText(setupVoices);
+  useSpeechWithAudio(setupVoices);
   console.log({ stmt });
   return (
     <>
